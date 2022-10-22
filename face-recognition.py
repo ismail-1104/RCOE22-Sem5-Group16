@@ -24,3 +24,14 @@ for cl in myList:
     classNames.append(os.path.splitext(cl)[0])
 
 print(classNames)
+
+def findEncodings(image):
+    encodeList = []
+    for img in image:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        encode = face_recognition.face_encodings(img)[0]
+        encodeList.append(encode)
+    return encodeList
+
+encodeListKnown = findEncodings(image)
+print('Encoding Completed...')
