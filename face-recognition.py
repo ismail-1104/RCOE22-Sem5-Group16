@@ -9,3 +9,12 @@ import winsound
 # imgIsmail = cv2.cvtColor(imgIsmail,cv2.COLOR_BGR2RGB)
 
 cam = cv2.VideoCapture(0)
+
+path = 'images'
+image = []
+classNames = []
+
+myList = os.listdir(path)
+
+print(myList)
+
