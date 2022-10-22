@@ -5,6 +5,7 @@ while cam.isOpened():
     ret, frame1 = cam.read()
     ret, frame2 = cam.read()
     diff = cv2.absdiff(frame1, frame2)
+    gray = cv2.cvtColor(diff, cv2.COLOR_RGB2BGR)
     if cv2.waitKey(10) == ord('e'):
         break
-    cv2.imshow('Security Camera', diff)
+    cv2.imshow('Security Camera', gray)
