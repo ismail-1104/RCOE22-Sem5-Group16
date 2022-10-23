@@ -93,8 +93,7 @@ def faceRecognition():
                 cv2.rectangle(img,(x1,y1),(x2,y2),(255,0,0),2)
                 cv2.rectangle(img,(x1,y2-35),(x2,y2),(255,0,0),cv2.FILLED)
                 cv2.putText(img,'Unknown Person',(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
-                winsound.PlaySound('alert.wav'), winsound.SND_ASYNC
-                
+                winsound.PlaySound('alert.wav', winsound.SND_ASYNC)                
 
         cv2.imshow('Webcam',img)
         cv2.waitKey(1)
