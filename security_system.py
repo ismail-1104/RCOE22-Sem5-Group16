@@ -11,8 +11,31 @@ import face_recognition
 import os
 
 cam = cv2.VideoCapture(0)
+#motion detection function
+def motion():
+    while cam.isOpened():
+        ret,frame1 = cam.read()
+        ret,frame2 = cam.read()
+        diff = cv2.absdiff(frame1, frame2)
+        gray = cv2.cvtColor(diff, cv2.COLOR_RGB2GRAY)
+        blur = cv2.GaussianBlur(gray, (5,5), 0)
+        _, thresh = cv2.threshold(blur, 20, 255, cv2.THRESH_BINARY)
+        dilated = cv2.dilate(thresh, None, iterations=3)
+        contours, _ = cv2.findContours(dilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        for c in contours:
+            if cv2.contourArea(c) < 5000:
+                continue
+            x, y, w, h = cv2.boundingRect(c)
+            cv2.rectangle(frame1, (x, y), (x+w, y+h), (0, 255, 0), 2)
+            winsound.PlaySound('alert.wav', winsound.SND_ASYNC)
+        if cv2.waitKey(10) == ord('a'):
+            break
+        cv2.imshow('Security Cam', frame1)
 
-#Function for motion detection
+
+
+
+#Function for Face Recogonition
 def faceRecognition():
     path = 'images'
     image = []
@@ -70,30 +93,32 @@ def faceRecognition():
                 cv2.rectangle(img,(x1,y1),(x2,y2),(255,0,0),2)
                 cv2.rectangle(img,(x1,y2-35),(x2,y2),(255,0,0),cv2.FILLED)
                 cv2.putText(img,'Unknown Person',(x1+6,y2-6),cv2.FONT_HERSHEY_COMPLEX,1,(255,255,255),2)
-                winsound.PlaySound('alert.wav', winsound.SND_ASYNC)
-
+                winsound.PlaySound('alert.wav'), winsound.SND_ASYNC
                 
 
         cv2.imshow('Webcam',img)
         cv2.waitKey(1)
-
-#Face recognition
-
-#Function for face recognition
-# def face-recognition():
-    
-
+#tkinter window    
 win = Tk()
-
+win.title("Security Camera")
 win.geometry("700x350")
 
+
+def motion_button():
+    motion()
+
 def open_face_recognition():
-   faceRecognition()
+    faceRecognition()
 
-#Create a Label widget
+
+#face recognition
 Label(win, text= "Click to open a Face Recognition camera").pack(pady=15)
-
-#Create a Button for opening a dialog Box
 ttk.Button(win, text= "Face Recognition", command= open_face_recognition).pack()
+
+#motion detection
+Label(win, text= "Click to open a Motion Detection Camera").pack(pady=15)
+ttk.Button(win, text= "Motion Detection", command= motion_button).pack()
+
+
 
 win.mainloop()
