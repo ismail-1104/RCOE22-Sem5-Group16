@@ -13,9 +13,9 @@
 
 ### Deployment Steps
 Please follow the below steps to run this project.
-1. Step 1 : Install Python Compiler and any Python Interpreter.
-2. Step 2 : open a new python file in the interpreter and clone the git reposotory there.
-3. Step 3 : Install Open-cv, cmake, dlib, face-recognition libraries using pip install in the terminal.
+1. Step 1 : Install Python Compiler (https://www.python.org/downloads/) and a Python Interpreter (https://www.jetbrains.com/pycharm/download/#section=windows).
+2. Step 2 : open a new python file in the interpreter and clone the git reposotory there using (git clone https://github.com/ismail-1104/RCOE22-Sem5-Group16.git .)command in the terminal.
+3. Step 3 : Install Open-cv, cmake, dlib, face-recognition libraries using pip install in the terminal(use the commands provided in the readme below).
 3. step 4 : Make sure your system has access to a webcam, if not connect one to run the code.
 
 ### Subject Details
